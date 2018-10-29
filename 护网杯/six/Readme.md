@@ -28,3 +28,7 @@ syscall
 shellcode2 = "/bin/sh\0".ljust(0xb36,'\0') + shellcode2
 ```
 使用execve系统调用，rdi保存的是rsp（伪造栈的地址），所以可以execve("/bin/sh")，获得shell。
+
+### 参考链接
+
+http://www.pwndog.top/2018/08/23/%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84PWN-%E9%93%81%E4%B8%89%E4%BA%91%E8%B4%B5%E7%AC%AC%E4%B8%89%E9%A2%98/
