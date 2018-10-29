@@ -9,3 +9,5 @@ final.py是关闭随机化后，测试直接覆盖__malloc_hook为one_gadget地�
 https://gist.github.com/romanking98/9aab2804832c0fb46615f025e8ffb0bc
 
 https://github.com/romanking98/House-Of-Roman
+
+https://www.jianshu.com/p/6ba2bea1079e
