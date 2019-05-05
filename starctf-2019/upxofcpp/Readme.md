@@ -12,7 +12,7 @@ In [12]: print disasm('90eb4d00'.decode('hex'))
 
 并将shellcode写入+0x50的堆块中，就能执行（加壳的程序堆块设置的权限是rwx）
 
-
+```
 gdb-peda$ heapinfo  
 (0x20)     fastbin[0]: 0x5621e1d04d00 --> 0x5621e1d04d70 --> `0x5621e1d04c50` --> 0x0  
 (0x30)     fastbin[1]: 0x0  
@@ -38,9 +38,11 @@ addr                prev                size                 status             
 0x5621e1d04d20      0x10                0x50                 Freed     0x5621e1d04d90              None  
 0x5621e1d04d70      0x0                 0x20                 Freed     0x5621e1d04c50              None  
 0x5621e1d04d90      0x10                0x50                 Freed                0x0              None  
+```
 
 调用Index[idx]->0x10要寻址两次
 
+```
 .text:0000000000001844                 lea     rdx, Index   
 .text:000000000000184B                 mov     rdi, [rdx+rax*8]  # rax=0 , rdi=0x5621e1d04d10  
 .text:000000000000184F                 test    rdi, rdi  
@@ -48,5 +50,5 @@ addr                prev                size                 status             
 .text:0000000000001854                 mov     rax, [rdi]  # rax=0x5621e1d04d70  
 .text:0000000000001857                 lea     rdx, sub_1E20    
 .text:000000000000185E                 mov     rax, [rax+10h]  # rax=0x5621e1d04c50  
-
+```
 
